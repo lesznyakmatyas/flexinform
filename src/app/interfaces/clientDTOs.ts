@@ -25,3 +25,25 @@ export interface Link {
   label: string;
   active: boolean;
 }
+
+export interface ClientCar {
+  id: number;
+  client_id: number;
+  car_id: string;
+  type: string;
+  registered: string;
+  ownbrand: boolean;
+  accidents: number;
+  created_at: string;
+  updated_at: string;
+  latest_service?: LatestService;
+}
+
+export interface LatestService {
+  id: number;
+  car_id: number;
+  log_number: number;
+  event: string;
+  event_time: string;
+  document_id: string;
+}

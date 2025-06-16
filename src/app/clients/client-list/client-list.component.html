@@ -11,7 +11,7 @@
       @for (client of clients(); track client.id) {
       <tr>
         <td>
-          <button class="btn btn-info">
+          <button class="btn btn-info" (click)="selectClient(client.id)">
             {{ client.name }}
           </button>
         </td>
@@ -20,7 +20,14 @@
         </td>
         <td>{{ client.card_number }}</td>
       </tr>
-      }
+      @if (selectedClientId===client.id) {
+      <tr>
+        <td colspan="3" style="padding-left: 40px">
+          <app-client-cars [clientId]="client.id"></app-client-cars>
+        </td>
+      </tr>
+
+      } }
     </tbody>
   </table>
 </div>

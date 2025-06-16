@@ -1,0 +1,34 @@
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width: 40%">Car Id</th>
+        <th>Type</th>
+        <th>Registered</th>
+        <th>Ownbrand</th>
+        <th>Accidents</th>
+        <th>Latest Service Event</th>
+        <th>Latest Service Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (car of clientCars(); track car.car_id) {
+      <tr>
+        <td>
+          <button class="btn btn-info">
+            {{ car.car_id }}
+          </button>
+        </td>
+        <td>
+          {{ car.type }}
+        </td>
+        <td>{{ car.registered }}</td>
+        <td>{{ car.ownbrand }}</td>
+        <td>{{ car.accidents }}</td>
+        <td>{{ car.latest_service?.event }}</td>
+        <td>{{ car.latest_service?.event_time }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
