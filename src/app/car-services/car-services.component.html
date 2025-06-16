@@ -1,0 +1,32 @@
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Log No.</th>
+        <th>Event</th>
+        <th>Event Date</th>
+        <th>Document Id</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (carService of carServices(); track carService.id) {
+      <tr>
+        <td>
+          {{ carService.log_number }}
+        </td>
+        <td>
+          {{ carService.event }}
+        </td>
+        <td>
+          {{
+            carService.event === "regisztralt"
+              ? registered()
+              : carService.event_time
+          }}
+        </td>
+        <td>{{ carService.document_id }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

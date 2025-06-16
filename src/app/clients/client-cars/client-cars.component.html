@@ -15,7 +15,7 @@
       @for (car of clientCars(); track car.car_id) {
       <tr>
         <td>
-          <button class="btn btn-info">
+          <button class="btn btn-info" (click)="selectCar(car.id)">
             {{ car.car_id }}
           </button>
         </td>
@@ -28,7 +28,18 @@
         <td>{{ car.latest_service?.event }}</td>
         <td>{{ car.latest_service?.event_time }}</td>
       </tr>
-      }
+      @if (selectedCarId===car.id) {
+      <tr>
+        <td colspan="7" style="padding-left: 40px">
+          <app-car-services
+            [clientId]="car.client_id"
+            [carId]="car.id"
+            [registered]="car.registered"
+          ></app-car-services>
+        </td>
+      </tr>
+
+      } }
     </tbody>
   </table>
 </div>
