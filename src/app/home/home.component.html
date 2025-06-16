@@ -1,0 +1,58 @@
+<div class="container mt-5">
+  <h1 class="text-center">
+    Admin Dashboard - <strong>Wheely Good Repairs</strong>
+  </h1>
+
+  <!-- Service Management Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2>Manage Services</h2>
+    </div>
+    <div class="card-body">
+      <button class="btn btn-success btn-lg mb-2" [disabled]="true">
+        Add New Service
+      </button>
+      <button class="btn btn-warning btn-lg mb-2" [disabled]="true">
+        Edit Services
+      </button>
+      <button class="btn btn-danger btn-lg mb-2" [disabled]="true">
+        Delete Service
+      </button>
+    </div>
+  </div>
+
+  <!-- Client Management Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2>Client Management</h2>
+    </div>
+    <div class="card-body">
+      <button class="btn btn-primary btn-lg mb-2" [routerLink]="['/clients']">
+        View Clients
+      </button>
+      <button class="btn btn-info btn-lg mb-2" [disabled]="true">
+        Contact a Client
+      </button>
+    </div>
+  </div>
+
+  <!-- Reports Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2>Reports</h2>
+    </div>
+    <div class="card-body">
+      <button class="btn btn-secondary btn-lg mb-2" [disabled]="true">
+        Generate Service Report
+      </button>
+      <button class="btn btn-dark btn-lg mb-2" [disabled]="true">
+        View All Bookings
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center mt-5">
+    <p>&copy; 2025 Wheely Good Repairs | Admin Dashboard</p>
+  </footer>
+</div>
