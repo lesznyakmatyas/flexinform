@@ -1,0 +1,26 @@
+<div class="row">
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width: 40%">Name</th>
+        <th style="width: 30%">Client Id</th>
+        <th style="width: 30%">Document Id</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (client of clients(); track client.id) {
+      <tr>
+        <td>
+          <button class="btn btn-info">
+            {{ client.name }}
+          </button>
+        </td>
+        <td>
+          {{ client.id }}
+        </td>
+        <td>{{ client.card_number }}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
