@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -18,6 +18,7 @@ import { oneFieldFilledValidator } from '../../validators/oneFieldFilledValidato
 })
 export class ClientListComponent implements OnInit {
   clientsService = inject(ClientsService);
+  private destroyRef = inject(DestroyRef);
   pageNumber = 1;
   pageSize = 5;
   clients = signal<ClientData[]>([]);
@@ -47,12 +48,15 @@ export class ClientListComponent implements OnInit {
   }
 
   fetchClients() {
-    this.clientsService.getClients(this.pageNumber, this.pageSize).subscribe({
-      next: (data) => {
-        this.clients.set(data.data);
-        this.filteredClient.set(null);
-      },
-    });
+    const subscription = this.clientsService
+      .getClients(this.pageNumber, this.pageSize)
+      .subscribe({
+        next: (data) => {
+          this.clients.set(data.data);
+          this.filteredClient.set(null);
+        },
+      });
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
   selectClient(clientId: number) {
@@ -64,16 +68,19 @@ export class ClientListComponent implements OnInit {
       const payload = {
         ...this.searchForm.value.searchGroup,
       };
-      this.clientsService.getClientsByParams(payload).subscribe({
-        next: (response) => {
-          this.validationError = '';
-          this.clients.set([]);
-          this.filteredClient.set(response);
-        },
-        error: (err) => {
-          this.validationError = err?.error.error;
-        },
-      });
+      const subscription = this.clientsService
+        .getClientsByParams(payload)
+        .subscribe({
+          next: (response) => {
+            this.validationError = '';
+            this.clients.set([]);
+            this.filteredClient.set(response);
+          },
+          error: (err) => {
+            this.validationError = err?.error.error;
+          },
+        });
+      this.destroyRef.onDestroy(() => subscription.unsubscribe());
     } else {
       this.searchForm.markAllAsTouched();
     }

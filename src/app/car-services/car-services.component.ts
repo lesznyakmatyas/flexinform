@@ -1,4 +1,11 @@
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { CarssService } from '../services/cars.service';
 import { CarService } from '../interfaces/carServiceDTOs';
 
@@ -10,6 +17,7 @@ import { CarService } from '../interfaces/carServiceDTOs';
 })
 export class CarServicesComponent implements OnInit {
   carssService = inject(CarssService);
+  private destroyRef = inject(DestroyRef);
   clientId = input.required<number>();
   carId = input.required<number>();
   registered = input.required<string>();
@@ -20,8 +28,11 @@ export class CarServicesComponent implements OnInit {
   }
 
   fetchClientCars() {
-    this.carssService.getCarServices(this.clientId(), this.carId()).subscribe({
-      next: (data) => this.carServices.set(data),
-    });
+    const subscription = this.carssService
+      .getCarServices(this.clientId(), this.carId())
+      .subscribe({
+        next: (data) => this.carServices.set(data),
+      });
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 }
