@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { getPaginationHeaders } from '../helpers/PaginationHelpter';
-import { ClientCar, PaginatedClientsResponse } from '../interfaces/clientDTOs';
+import {
+  ClientCar,
+  ClientsByParams,
+  GetClientsByParamsPayload,
+  PaginatedClientsResponse,
+} from '../interfaces/clientDTOs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +21,13 @@ export class ClientsService {
     return this.http.get<PaginatedClientsResponse>(`${this.baseUrl}clients`, {
       params: queryParams,
     });
+  }
+
+  getClientsByParams(payload: GetClientsByParamsPayload) {
+    return this.http.post<ClientsByParams>(
+      `${this.baseUrl}clients/search`,
+      payload
+    );
   }
 
   getClientCars(clientId: number) {

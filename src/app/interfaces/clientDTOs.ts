@@ -47,3 +47,16 @@ export interface LatestService {
   event_time: string;
   document_id: string;
 }
+
+export interface ClientsByParams {
+  id: number;
+  name: string;
+  card_number: string;
+  car_count: number;
+  service_count: number;
+}
+
+export interface GetClientsByParamsPayload {
+  name: string;
+  card_number: string;
+}
