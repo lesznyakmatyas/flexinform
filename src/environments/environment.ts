@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'api/',
+  apiUrl: 'https://carservice-backend-test.flexinform.hu/api/',
 };
