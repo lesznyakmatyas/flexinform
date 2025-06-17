@@ -25,6 +25,7 @@ export class ClientListComponent implements OnInit {
   selectedClientId?: number;
   fb = inject(FormBuilder);
   searchForm: FormGroup;
+  validationError?: string;
 
   constructor() {
     this.searchForm = this.fb.group({
@@ -65,8 +66,12 @@ export class ClientListComponent implements OnInit {
       };
       this.clientsService.getClientsByParams(payload).subscribe({
         next: (response) => {
+          this.validationError = '';
           this.clients.set([]);
           this.filteredClient.set(response);
+        },
+        error: (err) => {
+          this.validationError = err?.error.error;
         },
       });
     } else {
@@ -76,6 +81,7 @@ export class ClientListComponent implements OnInit {
 
   reset() {
     this.fetchClients();
+    this.validationError = '';
     this.searchForm.reset();
   }
 
