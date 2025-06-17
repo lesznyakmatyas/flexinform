@@ -2,7 +2,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th style="width: 40%">Car Id</th>
+        <th>Car Id</th>
         <th>Type</th>
         <th>Registered</th>
         <th>Ownbrand</th>
@@ -23,7 +23,19 @@
           {{ car.type }}
         </td>
         <td>{{ car.registered }}</td>
-        <td>{{ car.ownbrand }}</td>
+        <td>
+          <i
+            class="fa"
+            [class]="{
+              'fa-check-circle': car.ownbrand,
+              'fa-times-circle': !car.ownbrand
+            }"
+            [ngStyle]="{
+              color: car.ownbrand ? 'green' : 'red'
+            }"
+          ></i>
+        </td>
+
         <td>{{ car.accidents }}</td>
         <td>{{ car.latest_service?.event }}</td>
         <td>{{ car.latest_service?.event_time }}</td>
