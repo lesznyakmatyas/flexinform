@@ -23,7 +23,7 @@ export class ClientListComponent implements OnInit {
   pageSize = 5;
   clients = signal<ClientData[]>([]);
   filteredClient = signal<ClientsByParams | null>(null);
-  selectedClientId?: number;
+  selectedClientId: number | null = null;
   fb = inject(FormBuilder);
   searchForm: FormGroup;
   validationError?: string;
@@ -87,6 +87,7 @@ export class ClientListComponent implements OnInit {
   }
 
   reset() {
+    this.selectedClientId = null;
     this.fetchClients();
     this.validationError = '';
     this.searchForm.reset();
