@@ -28,6 +28,6 @@ jobs:
 
       - name: Deploy to Github pages
         env:
-          GITHUB_TOKEN: ${{ secrets.LM }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm run ng -- deploy --repo="https://github.com/lesznyakmatyas/flexinform.git" --base-href=/flexinform/ --name=lesznyakmatyas --email=lesznyak.matyas@gmail.com
